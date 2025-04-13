@@ -2,7 +2,22 @@ return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
-		"hrsh7th/cmp-nvim-lsp",
+     { "neovim/nvim-lspconfig" }, -- Required
+    { -- Optional
+      "williamboman/mason.nvim",
+      build = function()
+        pcall(vim.cmd, "MasonUpdate")
+      end,
+    },
+    { "williamboman/mason-lspconfig.nvim" }, -- Optional
+    { "hrsh7th/nvim-cmp" }, -- Required
+    { "hrsh7th/cmp-nvim-lsp" }, -- Required
+    { "L3MON4D3/LuaSnip" }, -- Required
+    { "rafamadriz/friendly-snippets" },
+    { "hrsh7th/cmp-buffer" },
+    { "hrsh7th/cmp-path" },
+    { "hrsh7th/cmp-cmdline" },
+    { "saadparwaiz1/cmp_luasnip" },
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 		{ "folke/neodev.nvim", opts = {} },
 	},
@@ -80,11 +95,11 @@ return {
 
 		mason_lspconfig.setup_handlers({
 			-- default handler for installed servers
-			function(server_name)
-				lspconfig[server_name].setup({
-					capabilities = capabilities,
-				})
-			end,
+			-- function(server_name)
+			-- 	lspconfig[server_name].setup({
+			-- 		capabilities = capabilities,
+			-- 	})
+			-- end,
 			["svelte"] = function()
 				-- configure svelte server
 				lspconfig["svelte"].setup({

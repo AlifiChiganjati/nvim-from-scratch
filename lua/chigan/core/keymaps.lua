@@ -1,4 +1,6 @@
 local map = vim.keymap.set -- for conciseness
+-- Oil
+map("n", "-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
 
 map("i", "jk", "<ESC>", { desc = "Exit insert mode with jk" })
 map("i", "kj", "<ESC>", { desc = "Exit insert mode with kj" })
