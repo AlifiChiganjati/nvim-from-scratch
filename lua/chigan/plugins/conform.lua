@@ -1,5 +1,6 @@
 return {
 	"stevearc/conform.nvim",
+	enabled = true,
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		local conform = require("conform")
@@ -14,6 +15,7 @@ return {
 								return true
 							end
 						end
+						return false
 					end,
 				},
 				["markdownlint-cli2"] = {
@@ -37,14 +39,12 @@ return {
 				json = { "prettierd", "prettier", stop_after_first = true },
 				graphql = { "prettierd", "prettier", stop_after_first = true },
 				java = { "google-java-format" },
-				kotlin = { "ktlint" },
 				ruby = { "standardrb" },
 				markdown = { "prettierd", "prettier", stop_after_first = true },
 				erb = { "htmlbeautifier" },
 				html = { "htmlbeautifier" },
 				bash = { "beautysh" },
 				proto = { "buf" },
-				rust = { "rustfmt" },
 				yaml = { "yamlfix" },
 				toml = { "taplo" },
 				css = { "prettierd", "prettier", stop_after_first = true },
@@ -52,6 +52,8 @@ return {
 				sh = { "shellcheck" },
 				go = { "gofmt" },
 				xml = { "xmllint" },
+				php = { "pint" },
+				blade = { "blade-formatter" },
 			},
 
 			format_on_save = {

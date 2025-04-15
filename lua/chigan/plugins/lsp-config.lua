@@ -2,22 +2,16 @@ return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
-     { "neovim/nvim-lspconfig" }, -- Required
-    { -- Optional
-      "williamboman/mason.nvim",
-      build = function()
-        pcall(vim.cmd, "MasonUpdate")
-      end,
-    },
-    { "williamboman/mason-lspconfig.nvim" }, -- Optional
-    { "hrsh7th/nvim-cmp" }, -- Required
-    { "hrsh7th/cmp-nvim-lsp" }, -- Required
-    { "L3MON4D3/LuaSnip" }, -- Required
-    { "rafamadriz/friendly-snippets" },
-    { "hrsh7th/cmp-buffer" },
-    { "hrsh7th/cmp-path" },
-    { "hrsh7th/cmp-cmdline" },
-    { "saadparwaiz1/cmp_luasnip" },
+		{ "neovim/nvim-lspconfig" }, -- Required
+		{ "williamboman/mason-lspconfig.nvim" }, -- Optional
+		{ "hrsh7th/nvim-cmp" }, -- Required
+		{ "hrsh7th/cmp-nvim-lsp" }, -- Required
+		{ "L3MON4D3/LuaSnip" }, -- Required
+		{ "rafamadriz/friendly-snippets" },
+		{ "hrsh7th/cmp-buffer" },
+		{ "hrsh7th/cmp-path" },
+		{ "hrsh7th/cmp-cmdline" },
+		{ "saadparwaiz1/cmp_luasnip" },
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 		{ "folke/neodev.nvim", opts = {} },
 	},
@@ -69,10 +63,14 @@ return {
 				keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
 
 				opts.desc = "Go to previous diagnostic"
-				keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
+				keymap.set("n", "[d", function()
+					vim.diagnostic.jump({ count = 1, float = true })
+				end, opts) -- jump to previous diagnostic in buffer
 
 				opts.desc = "Go to next diagnostic"
-				keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
+				keymap.set("n", "]d", function()
+					vim.diagnostic.jump({ count = -1, float = true })
+				end, opts) -- jump to next diagnostic in buffer
 
 				opts.desc = "Show documentation for what is under cursor"
 				keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
@@ -95,11 +93,11 @@ return {
 
 		mason_lspconfig.setup_handlers({
 			-- default handler for installed servers
-			-- function(server_name)
-			-- 	lspconfig[server_name].setup({
-			-- 		capabilities = capabilities,
-			-- 	})
-			-- end,
+			function(server_name)
+				lspconfig[server_name].setup({
+					capabilities = capabilities,
+				})
+			end,
 			["svelte"] = function()
 				-- configure svelte server
 				lspconfig["svelte"].setup({
@@ -150,6 +148,21 @@ return {
 							},
 							completion = {
 								callSnippet = "Replace",
+							},
+						},
+					},
+				})
+			end,
+			["intelephense"] = function()
+				lspconfig["intelephense"].setup({
+					capabilities = capabilities,
+					filetypes = { "php", "blade", "php_only" },
+					settings = {
+						intelephense = {
+							filetypes = { "php", "blade", "php_only" },
+							files = {
+								associations = { "*.php", "*.blade.php" }, -- Associating .blade.php files as well
+								maxSize = 5000000,
 							},
 						},
 					},

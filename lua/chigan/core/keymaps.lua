@@ -57,3 +57,6 @@ map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
 -- quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
+
+map("n", "<leader>tf", "<cmd>ToggleTerm<cr>", { desc = "Terminal" })
+map("n", "<C-_>", "<cmd>ToggleTerm<cr>", { noremap = true, silent = true })
