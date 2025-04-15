@@ -72,6 +72,7 @@ return {
 				"phpstan",
 				"pint",
 				"markdownlint-cli2",
+				"hadolint",
 			},
 		})
 	end,
