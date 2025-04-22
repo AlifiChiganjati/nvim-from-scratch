@@ -1,18 +1,19 @@
 return {
 	"lukas-reineke/indent-blankline.nvim",
+	enabled = false,
 	event = { "BufReadPre", "BufNewFile" },
 	main = "ibl",
 	opts = {
 		indent = {
 			char = "▏",
 			tab_char = "▏",
-			highlight = 'IndentBlanklineChar',
+			highlight = "IndentBlanklineChar",
 			smart_indent_cap = true,
 			priority = 2,
 			repeat_linebreak = false,
 		},
 		whitespace = {
-			highlight = 'IndentBlanklineContextChar',
+			highlight = "IndentBlanklineContextChar",
 			remove_blankline_trail = true,
 		},
 		scope = {

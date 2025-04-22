@@ -1,30 +1,33 @@
 return {
-  "windwp/nvim-autopairs",
-  event = { "InsertEnter" },
-  dependencies = {
-    "hrsh7th/nvim-cmp",
-  },
-  config = function()
-    -- import nvim-autopairs
-    local autopairs = require("nvim-autopairs")
+	"saghen/blink.pairs",
+	enabled = true,
+	version = "*", -- (recommended) only required with prebuilt binaries
 
-    -- configure autopairs
-    -- autopairs.setup({
-    --   check_ts = true, -- enable treesitter
-    --   ts_config = {
-    --     lua = { "string" }, -- don't add pairs in lua string treesitter nodes
-    --     javascript = { "template_string" }, -- don't add pairs in javscript template_string treesitter nodes
-    --     java = false, -- don't check treesitter on java
-    --   },
-    -- })
-    autopairs.setup()
-    -- import nvim-autopairs completion functionality
-    local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+	-- download prebuilt binaries from github releases
+	dependencies = "saghen/blink.download",
+	-- OR build from source
+	build = "cargo build --release",
 
-    -- import nvim-cmp plugin (completions plugin)
-    local cmp = require("cmp")
-
-    -- make autopairs and completion work together
-    cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-  end,
+	opts = {
+		mappings = {
+			-- you can call require("blink.pairs.mappings").enable() and require("blink.pairs.mappings").disable() to enable/disable mappings at runtime
+			enabled = true,
+			-- see the defaults: https://github.com/Saghen/blink.pairs/blob/main/lua/blink/pairs/config/mappings.lua#L10
+			pairs = {},
+		},
+		priority = {
+			priority = true,
+			enabled = true,
+			groups = {
+				"BlinkPairsOrange",
+				"BlinkPairsPurple",
+				"BlinkPairsBlue",
+			},
+			matchparen = {
+				enabled = true,
+				group = "MatchParen",
+			},
+		},
+		debug = false,
+	},
 }

@@ -1,6 +1,6 @@
 return {
 	"mfussenegger/nvim-lint",
-	enabled = false,
+	enabled = true,
 	event = {
 		"BufReadPre",
 		"BufNewFile",
@@ -20,26 +20,16 @@ return {
 			php = { "phpstan" },
 		}
 
-		lint.linters = {}
-
-		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-
+		-- lint.linters = {}
+		local augroup = vim.api.nvim_create_augroup("nvim_lint_autocmds", { clear = true })
 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-			group = lint_augroup,
+			group = augroup,
 			callback = function()
 				lint.try_lint()
 			end,
 		})
-		-- vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-		-- 	group = lint_augroup,
-		-- 	callback = function()
-		-- 		local success, err = pcall(lint.try_lint)
-		-- 		if not success then
-		-- 			print("Linting failed: " .. err)
-		-- 		end
-		-- 	end,
-		-- })
 
+		-- Manual lint trigger
 		vim.keymap.set("n", "<leader>ll", function()
 			lint.try_lint()
 		end, { desc = "Trigger linting for current file" })

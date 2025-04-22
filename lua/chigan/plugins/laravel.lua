@@ -4,10 +4,11 @@ return {
 		-- from Neovim.
 		"adalessa/laravel.nvim",
 		dependencies = {
-			"nvim-telescope/telescope.nvim",
 			"tpope/vim-dotenv",
 			"MunifTanjim/nui.nvim",
+			"kevinhwang91/promise-async",
 		},
+		ft = { "php" },
 		cmd = { "Sail", "Artisan", "Composer", "Npm", "Yarn", "Laravel" },
 		keys = {
 			{ "<leader>la", ":Laravel artisan<cr>" },
@@ -18,7 +19,12 @@ return {
 		config = true,
 		opts = {
 			lsp_server = "intelephense",
-			features = { null_ls = { enable = false } },
+			features = {
+				-- null_ls = { enable = false },
+				pickers = {
+					provider = "fzf-lua",
+				},
+			},
 		},
 	},
 }

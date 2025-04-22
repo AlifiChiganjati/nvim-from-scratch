@@ -6,6 +6,7 @@ return {
 	},
 	cmd = "Trouble",
 	keys = {
+		{ "<leader>x", "", desc = "Diagnostics" },
 		{ "<leader>xw", "<cmd>Trouble diagnostics toggle<CR>", desc = "Open trouble workspace diagnostics" },
 		{
 			"<leader>xd",

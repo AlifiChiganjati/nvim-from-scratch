@@ -12,6 +12,7 @@ map("n", "<leader>+", "<C-a>", { desc = "Increment number" }) -- increment
 map("n", "<leader>-", "<C-x>", { desc = "Decrement number" }) -- decrement
 
 -- window management
+map("n", "<leader>s", "", { desc = "Windows" })
 map("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" }) -- split window vertically
 map("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" }) -- split window horizontally
 map("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
@@ -53,10 +54,49 @@ map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", {
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 
 -- lazy
-map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
+map("n", "<leader>lL", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
 -- quit
-map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
+map("n", "<leader>q", "", { desc = "Quit" })
+map("n", "<leader>qa", "<cmd>qa<cr>", { desc = "Quit All" })
+map("n", "<leader>qq", "<cmd>q<cr>", { desc = "Quit" })
+map("n", "<leader>qf", "<cmd>q!<cr>", { desc = "Quit Force" })
+map("n", "<leader>qw", "<cmd>wqa<cr>", { desc = "Save Quit All" })
 
-map("n", "<leader>tf", "<cmd>ToggleTerm<cr>", { desc = "Terminal" })
-map("n", "<C-_>", "<cmd>ToggleTerm<cr>", { noremap = true, silent = true })
+--file explorer
+map("n", "<leader>e", function() end, { desc = "File Explorer" })
+map("n", "<leader>ee", function()
+	Snacks.explorer()
+end, { desc = "File Explorer" })
+
+-- terminal
+map({ "n", "t" }, "<c-/>", function()
+	Snacks.terminal()
+end, { desc = "Toggle Terminal" })
+map({ "n", "t" }, "<c-_>", function()
+	Snacks.terminal()
+end, { desc = "which_key_ignore" })
+
+map("n", "<leader>c", function() end, { desc = "Code" })
+
+map({ "n", "v" }, "<leader>cp", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Markdown Prieview" })
+
+-- find
+map("n", "<leader>fb", function()
+	Snacks.picker.buffers()
+end, { desc = "Buffers" })
+map("n", "<leader>fc", function()
+	Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
+end, { desc = "Find Config File" })
+map("n", "<leader>ff", function()
+	Snacks.picker.files()
+end, { desc = "Find Files" })
+map("n", "<leader>fg", function()
+	Snacks.picker.git_files()
+end, { desc = "Find Git Files" })
+map("n", "<leader>fp", function()
+	Snacks.picker.projects()
+end, { desc = "Projects" })
+map("n", "<leader>fr", function()
+	Snacks.picker.recent()
+end, { desc = "Recent" })
