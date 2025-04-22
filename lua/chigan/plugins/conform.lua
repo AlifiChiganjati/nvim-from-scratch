@@ -40,7 +40,7 @@ return {
 				graphql = { "prettierd", "prettier", stop_after_first = true },
 				java = { "google-java-format" },
 				ruby = { "standardrb" },
-				markdown = { "prettierd", "prettier", stop_after_first = true },
+				markdown = { "markdownlint-cli2" },
 				erb = { "htmlbeautifier" },
 				html = { "htmlbeautifier" },
 				bash = { "beautysh" },

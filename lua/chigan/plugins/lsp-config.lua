@@ -34,6 +34,11 @@ return {
 					capabilities = capabilities,
 				})
 			end,
+			["vtsls"] = function()
+				lspconfig["vtsls"].setup({
+					capabilities = capabilities,
+				})
+			end,
 			["svelte"] = function()
 				-- configure svelte server
 				lspconfig["svelte"].setup({
@@ -69,6 +74,7 @@ return {
 						"scss",
 						"less",
 						"svelte",
+						"blade",
 					},
 				})
 			end,
