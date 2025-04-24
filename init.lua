@@ -1,1 +1,1 @@
- require("chigan.core")
+require("chigan.core")

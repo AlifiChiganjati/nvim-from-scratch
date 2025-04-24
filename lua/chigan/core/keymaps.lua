@@ -1,7 +1,6 @@
 local map = vim.keymap.set -- for conciseness
--- Oil
-map("n", "-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
 
+--esc insert
 map("i", "jk", "<ESC>", { desc = "Exit insert mode with jk" })
 map("i", "kj", "<ESC>", { desc = "Exit insert mode with kj" })
 
@@ -56,11 +55,15 @@ map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 -- lazy
 map("n", "<leader>lL", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
+--mason
+map("n", "<leader>cm", "<cmd>Mason<cr>", { desc = "Mason" })
+
 -- quit
 map("n", "<leader>q", "", { desc = "Quit" })
 map("n", "<leader>qa", "<cmd>qa<cr>", { desc = "Quit All" })
 map("n", "<leader>qq", "<cmd>q<cr>", { desc = "Quit" })
 map("n", "<leader>qf", "<cmd>q!<cr>", { desc = "Quit Force" })
+map("n", "<leader>qF", "<cmd>qa!<cr>", { desc = "Quit All Force" })
 map("n", "<leader>qw", "<cmd>wqa<cr>", { desc = "Save Quit All" })
 
 --file explorer
@@ -78,8 +81,23 @@ map({ "n", "t" }, "<c-_>", function()
 end, { desc = "which_key_ignore" })
 
 map("n", "<leader>c", function() end, { desc = "Code" })
-
 map({ "n", "v" }, "<leader>cp", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Markdown Prieview" })
+
+map({ "n", "v", "t" }, "<leader><space>", function()
+	Snacks.picker.smart()
+end, { desc = "Smart Find Files" })
+map({ "n" }, "<leader>,", function()
+	Snacks.picker.buffers()
+end, { desc = "Buffers" })
+map({ "n" }, "<leader>/", function()
+	Snacks.picker.grep()
+end, { desc = "Grep" })
+map({ "n" }, "<leader>:", function()
+	Snacks.picker.command_history()
+end, { desc = "Command History" })
+map({ "n" }, "<leader>n", function()
+	Snacks.picker.notifications()
+end, { desc = "Notification History" })
 
 -- find
 map("n", "<leader>fb", function()
