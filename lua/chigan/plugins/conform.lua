@@ -1,5 +1,6 @@
 return {
 	"stevearc/conform.nvim",
+	enabled = true,
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		local conform = require("conform")
@@ -56,7 +57,7 @@ return {
 			},
 
 			format_on_save = {
-				timeout_ms = 1000,
+				timeout_ms = 3000,
 				lsp_fallback = true,
 			},
 		})

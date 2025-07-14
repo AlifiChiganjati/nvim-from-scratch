@@ -5,7 +5,7 @@ return {
 	version = "*",
 	dependencies = {
 		"SmiteshP/nvim-navic",
-		"nvim-tree/nvim-web-devicons", -- optional dependency
+		"DaikyXendo/nvim-material-icon",
 	},
 	opts = {
 		show_dirname = false,
