@@ -18,7 +18,6 @@ return {
 				explorer = {
 					layout = {
 						preset = "sidebar",
-						preview = false,
 						layout = {
 							position = "right",
 						},
