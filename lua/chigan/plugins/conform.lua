@@ -52,7 +52,8 @@ return {
 				sh = { "shellcheck" },
 				go = { "gofmt" },
 				xml = { "xmllint" },
-				php = { "blade-formatter" },
+				php = { "pint" },
+				-- php = { "php_cs_fixer" },
 				blade = { "blade-formatter" },
 			},
 
@@ -62,7 +63,7 @@ return {
 			},
 		})
 
-		vim.keymap.set({ "n", "v" }, "<leader>l", function()
+		vim.keymap.set({ "n", "v" }, "<leader>cf", function()
 			conform.format({
 				lsp_fallback = true,
 				async = false,

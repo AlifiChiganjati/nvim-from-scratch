@@ -65,6 +65,7 @@ return {
 				"norg",
 				"scss",
 				"typst",
+				-- "latex",
 			},
 		})
 	end,

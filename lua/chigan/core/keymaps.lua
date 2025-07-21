@@ -62,10 +62,10 @@ map("n", "<leader>cm", "<cmd>Mason<cr>", { desc = "Mason" })
 map("n", "<leader>q", "", { desc = "Quit" })
 map("n", "<leader>qq", "<cmd>q<cr>", { desc = "Quit" })
 map("n", "<leader>qa", "<cmd>qa<cr>", { desc = "Quit All" })
+map("n", "<leader>qw", "<cmd>wqa<cr>", { desc = "Quit Save All" })
 
 --file explorer
-map("n", "<leader>e", function() end, { desc = "File Explorer" })
-map("n", "<leader>ee", function()
+map("n", "<leader>e", function()
 	Snacks.explorer()
 end, { desc = "File Explorer" })
 
@@ -78,7 +78,7 @@ map({ "n", "t" }, "<c-_>", function()
 end, { desc = "which_key_ignore" })
 
 map("n", "<leader>c", function() end, { desc = "Code" })
-map({ "n", "v" }, "<leader>cp", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Markdown Prieview" })
+map({ "n", "v" }, "<leader>cp", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Markdown Preview" })
 
 map({ "n", "v", "t" }, "<leader><space>", function()
 	Snacks.picker.smart()

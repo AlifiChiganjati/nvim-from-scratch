@@ -3,20 +3,25 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons", "folke/todo-comments.nvim" },
 	opts = {
 		focus = true,
-		modes = {
-			lsp = {
-				win = { position = "right" },
-			},
-		},
 	},
 	cmd = "Trouble",
 	keys = {
 		{ "<leader>x", "", desc = "Diagnostics" },
-		{ "<leader>xw", "<cmd>Trouble diagnostics toggle<CR>", desc = "Open trouble workspace diagnostics" },
+		{ "<leader>xx", "<cmd>Trouble diagnostics toggle<CR>", desc = "Open trouble workspace diagnostics" },
 		{
-			"<leader>xd",
+			"<leader>xX",
 			"<cmd>Trouble diagnostics toggle filter.buf=0<CR>",
 			desc = "Open trouble document diagnostics",
+		},
+		{
+			"<leader>cs",
+			"<cmd>Trouble symbols toggle focus=false<cr>",
+			desc = "Symbols (Trouble)",
+		},
+		{
+			"<leader>cl",
+			"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+			desc = "LSP Definitions / references / ... (Trouble)",
 		},
 		{ "<leader>xq", "<cmd>Trouble quickfix toggle<CR>", desc = "Open trouble quickfix list" },
 		{ "<leader>xl", "<cmd>Trouble loclist toggle<CR>", desc = "Open trouble location list" },

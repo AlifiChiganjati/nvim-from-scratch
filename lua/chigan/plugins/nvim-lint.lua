@@ -43,8 +43,9 @@ return {
 				typescriptreact = { "eslint_d" },
 				svelte = { "eslint_d" },
 				terraform = { "tflint" },
-				php = { "tlint" },
-				blade = { "tlint" },
+				php = { "phpstan" },
+				-- php = { "phpcs" },
+				blade = { "phpstan" },
 				["_"] = {}, -- fallback
 				["*"] = {}, -- global
 			},
