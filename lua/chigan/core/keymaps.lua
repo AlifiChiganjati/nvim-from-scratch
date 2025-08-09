@@ -60,7 +60,6 @@ map("n", "<leader>cm", "<cmd>Mason<cr>", { desc = "Mason" })
 
 -- quit
 map("n", "<leader>q", "", { desc = "Quit" })
-map("n", "<leader>qq", "<cmd>q<cr>", { desc = "Quit" })
 map("n", "<leader>qa", "<cmd>qa<cr>", { desc = "Quit All" })
 map("n", "<leader>qw", "<cmd>wqa<cr>", { desc = "Quit Save All" })
 
