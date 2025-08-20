@@ -2,60 +2,39 @@ return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
-		{ "williamboman/mason-lspconfig.nvim" },
 		{ "saghen/blink.cmp", opts = {} },
-		{ "rafamadriz/friendly-snippets" },
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 		{ "folke/neodev.nvim" },
 	},
 	config = function()
 		local capabilities = require("blink.cmp").get_lsp_capabilities()
+		local lspconfig = vim.lsp.config
 		local keymap = vim.keymap
 
-		-- Keymaps on attach
+		-- Common keymaps on attach
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 			callback = function(ev)
 				local opts = { buffer = ev.buf, silent = true }
-
-				opts.desc = "Show LSP references"
-				keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
-
-				opts.desc = "Go to declaration"
-				keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-
-				opts.desc = "Show LSP definitions"
-				keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
-
-				opts.desc = "Show LSP implementations"
-				keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
-
-				opts.desc = "Show LSP type definitions"
-				keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
-
-				opts.desc = "See available code actions"
-				keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
-
-				opts.desc = "Smart rename"
-				keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-
-				opts.desc = "Show buffer diagnostics"
-				keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
-
-				opts.desc = "Show line diagnostics"
-				keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
-
-				opts.desc = "Go to previous diagnostic"
-				keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-
-				opts.desc = "Go to next diagnostic"
-				keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-
-				opts.desc = "Show documentation for what is under cursor"
-				keymap.set("n", "K", vim.lsp.buf.hover, opts)
-
-				opts.desc = "Restart LSP"
-				keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
+				local mappings = {
+					{ "n", "gR", "<cmd>Telescope lsp_references<CR>", "Show LSP references" },
+					{ "n", "gD", vim.lsp.buf.declaration, "Go to declaration" },
+					{ "n", "gd", "<cmd>Telescope lsp_definitions<CR>", "Show LSP definitions" },
+					{ "n", "gi", "<cmd>Telescope lsp_implementations<CR>", "Show LSP implementations" },
+					{ "n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", "Show LSP type definitions" },
+					{ { "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "See available code actions" },
+					{ "n", "<leader>rn", vim.lsp.buf.rename, "Smart rename" },
+					{ "n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", "Show buffer diagnostics" },
+					{ "n", "<leader>d", vim.diagnostic.open_float, "Show line diagnostics" },
+					{ "n", "[d", vim.diagnostic.goto_prev, "Previous diagnostic" },
+					{ "n", "]d", vim.diagnostic.goto_next, "Next diagnostic" },
+					{ "n", "K", vim.lsp.buf.hover, "Hover documentation" },
+					{ "n", "<leader>rs", ":LspRestart<CR>", "Restart LSP" },
+				}
+				for _, m in ipairs(mappings) do
+					opts.desc = m[4]
+					keymap.set(m[1], m[2], m[3], opts)
+				end
 			end,
 		})
 
@@ -80,27 +59,26 @@ return {
 			severity_sort = true,
 		})
 
-		vim.lsp.config("*", {
-			capabilities = capabilities,
-		})
+		-- Default capabilities
+		lspconfig("*", { capabilities = capabilities })
 
-		vim.lsp.config("svelte", {
-			on_attach = function(client, bufnr)
+		-- Language-specific configs
+		lspconfig("svelte", {
+			on_attach = function(client)
 				vim.api.nvim_create_autocmd("BufWritePost", {
 					pattern = { "*.js", "*.ts" },
 					callback = function(ctx)
-						-- Here use ctx.match instead of ctx.file
 						client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
 					end,
 				})
 			end,
 		})
 
-		vim.lsp.config("graphql", {
+		lspconfig("graphql", {
 			filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
 		})
 
-		vim.lsp.config("emmet_ls", {
+		lspconfig("emmet_ls", {
 			filetypes = {
 				"html",
 				"typescriptreact",
@@ -115,29 +93,60 @@ return {
 			},
 		})
 
-		vim.lsp.config("eslint", {
+		lspconfig("eslint", {
 			filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
 		})
 
-		vim.lsp.config("lua_ls", {
+		lspconfig("lua_ls", {
 			settings = {
 				Lua = {
-					-- make the language server recognize "vim" global
-					diagnostics = {
-						globals = { "vim" },
-					},
-					completion = {
-						callSnippet = "Replace",
-					},
+					diagnostics = { globals = { "vim" } },
+					completion = { callSnippet = "Replace" },
 				},
 			},
 		})
 
-		vim.lsp.config("intelephense", {
+		lspconfig("golsp", {
+			settings = {
+				gopls = {
+					gofumpt = true,
+					codelenses = {
+						generate = true,
+						regenerate_cgo = true,
+						run_govulncheck = true,
+						test = true,
+						tidy = true,
+						upgrade_dependency = true,
+						vendor = true,
+					},
+					hints = {
+						assignVariableTypes = true,
+						compositeLiteralFields = true,
+						compositeLiteralTypes = true,
+						constantValues = true,
+						functionTypeParameters = true,
+						parameterNames = true,
+						rangeVariableTypes = true,
+					},
+					analyses = {
+						nilness = true,
+						unusedparams = true,
+						unusedwrite = true,
+						useany = true,
+					},
+					usePlaceholders = true,
+					completeUnimported = true,
+					staticcheck = true,
+					directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+					semanticTokens = true,
+				},
+			},
+		})
+
+		lspconfig("intelephense", {
 			filetypes = { "php", "blade", "php_only" },
 			settings = {
 				intelephense = {
-					filetypes = { "php", "blade", "php_only" },
 					files = {
 						associations = { "*.php", "*.blade.php" },
 						maxSize = 5000000,

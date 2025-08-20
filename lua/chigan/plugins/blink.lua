@@ -17,11 +17,11 @@ return {
 			["<C-e>"] = false, -- or {}
 
 			-- show with a list of providers
-			["<C-space>"] = {
-				function(cmp)
-					cmp.show({ providers = { "snippets" } })
-				end,
-			},
+			-- ["<C-space>"] = {
+			-- 	function(cmp)
+			-- 		cmp.show({ providers = { "snippets" } })
+			-- 	end,
+			-- },
 		},
 
 		appearance = {
