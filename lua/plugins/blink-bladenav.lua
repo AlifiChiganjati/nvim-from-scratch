@@ -2,6 +2,7 @@ return {
 	"saghen/blink.cmp",
 	dependencies = {
 		"ricardoramirezr/blade-nav.nvim",
+		"saghen/blink.compat",
 	},
 	optional = true,
 	opts = {

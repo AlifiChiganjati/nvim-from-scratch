@@ -28,7 +28,7 @@ return {
 		{
 			"<leader>s",
 			"",
-			desc = "Window",
+			desc = "Search",
 		},
 		{
 			"<leader>c",
@@ -43,7 +43,7 @@ return {
 		{
 			"<leader>n",
 			"",
-			desc = "",
+			desc = "Notification History",
 		},
 		{
 			"<leader>t",
@@ -56,7 +56,10 @@ return {
 			desc = "Explorer",
 		},
 		{ "<leader>x", "", desc = "Diagnostics" },
-		{ "<leader>f", "", desc = "Find" },
+		{ "<leader>f", "", desc = "File/Find" },
 		{ "<leader>g", "", desc = "Git" },
+		{ "<leader>b", "", desc = "Buffer" },
+		{ "<leader>u", "", desc = "UI" },
+		{ "<leader>r", "", desc = "Restart" },
 	},
 }

@@ -4,7 +4,7 @@ local map = vim.keymap.set -- for conciseness
 map("i", "jk", "<ESC>", { desc = "Exit insert mode with jk" })
 map("i", "kj", "<ESC>", { desc = "Exit insert mode with kj" })
 
-map("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
+map("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights", silent = true })
 
 -- increment/decrement numbers
 map("n", "<leader>+", "<C-a>", { desc = "Increment number" }) -- increment

@@ -3,6 +3,7 @@ return {
 	optional = true,
 	dependencies = {
 		"adalessa/laravel.nvim",
+		"saghen/blink.compat",
 	},
 	opts = {
 		sources = {
