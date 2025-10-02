@@ -1,6 +1,8 @@
 return {
 	"akinsho/bufferline.nvim",
-	dependencies = {},
+	dependencies = {
+		"DaikyXendo/nvim-material-icon",
+	},
 	version = "*",
 	opts = {
 		options = {
